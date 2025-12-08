@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light mode color palette */
+  --color-light-gray: #f3f2f3;
+  --color-beige: #ded7cd;
+  --color-gold: #b4a66d;
+  --color-teal: #3d555b;
+  --color-charcoal: #212f35;
+
+  --foreground-rgb: 33, 47, 53;
+  --background-start-rgb: 243, 242, 243;
+  --background-end-rgb: 243, 242, 243;
+}
+
+@layer base {
+  body {
+    color: rgb(var(--foreground-rgb));
+    background: rgb(var(--background-start-rgb));
+    font-family: var(--font-geist-sans, ui-sans-serif, system-ui, sans-serif);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-geist-sans, ui-sans-serif, system-ui, sans-serif);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+  }
+
+  p {
+    font-family: var(--font-geist-sans, ui-sans-serif, system-ui, sans-serif);
+    font-weight: 400;
+  }
+}
