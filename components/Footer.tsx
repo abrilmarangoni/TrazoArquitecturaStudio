@@ -4,21 +4,21 @@ import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { useEffect, useState, useCallback } from "react"
 
-export default function Footer() {
-  const [isAtBottom, setIsAtBottom] = useState(false)
+export default function Footer(): JSX.Element {
+  const [isAtBottom, setIsAtBottom] = useState<boolean>(false)
 
-  const handleScroll = useCallback(() => {
-    const scrollTop = window.scrollY
-    const windowHeight = window.innerHeight
-    const documentHeight = document.documentElement.scrollHeight
-    const isNearBottom = scrollTop + windowHeight >= documentHeight - 100
+  const handleScroll = useCallback((): void => {
+    const scrollTop: number = window.scrollY
+    const windowHeight: number = window.innerHeight
+    const documentHeight: number = document.documentElement.scrollHeight
+    const isNearBottom: boolean = scrollTop + windowHeight >= documentHeight - 100
     setIsAtBottom(isNearBottom)
   }, [])
 
   useEffect(() => {
     let rafId: number
 
-    const onScroll = () => {
+    const onScroll = (): void => {
       cancelAnimationFrame(rafId)
       rafId = requestAnimationFrame(handleScroll)
     }
@@ -26,7 +26,7 @@ export default function Footer() {
     window.addEventListener("scroll", onScroll, { passive: true })
     handleScroll()
 
-    return () => {
+    return (): void => {
       window.removeEventListener("scroll", onScroll)
       cancelAnimationFrame(rafId)
     }

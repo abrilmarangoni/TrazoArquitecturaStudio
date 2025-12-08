@@ -5,8 +5,18 @@ import type React from "react"
 import { geist } from "@/app/fonts"
 import { useState } from "react"
 
-export default function ContactSection() {
-  const [formData, setFormData] = useState({
+interface FormData {
+  nombre: string
+  apellido: string
+  email: string
+  prefijo: string
+  telefono: string
+  servicio: string
+  duda: string
+}
+
+export default function ContactSection(): JSX.Element {
+  const [formData, setFormData] = useState<FormData>({
     nombre: "",
     apellido: "",
     email: "",
@@ -16,13 +26,14 @@ export default function ContactSection() {
     duda: "",
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
     console.log("Form submitted:", formData)
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
+    const { name, value } = e.target
+    setFormData((prev: FormData) => ({ ...prev, [name]: value }))
   }
 
   return (

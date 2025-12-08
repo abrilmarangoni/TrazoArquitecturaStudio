@@ -5,7 +5,16 @@ import Image from "next/image"
 import { ArrowDown } from "lucide-react"
 import { geist } from "../app/fonts"
 
-const residencialProjects = [
+interface Project {
+  id: number
+  title: string
+  location: string
+  image: string
+}
+
+type ProjectTab = "residencial" | "comercial"
+
+const residencialProjects: Project[] = [
   {
     id: 1,
     title: "25 de mayo",
@@ -68,7 +77,7 @@ const residencialProjects = [
   },
 ]
 
-const comercialProjects = [
+const comercialProjects: Project[] = [
   {
     id: 1,
     title: "Bar Arco",
@@ -101,16 +110,16 @@ const comercialProjects = [
   },
 ]
 
-export default function ProjectsSection() {
-  const [activeTab, setActiveTab] = useState<"residencial" | "comercial">("residencial")
-  const [isExpanded, setIsExpanded] = useState(false)
+export default function ProjectsSection(): JSX.Element {
+  const [activeTab, setActiveTab] = useState<ProjectTab>("residencial")
+  const [isExpanded, setIsExpanded] = useState<boolean>(false)
 
-  const projects = activeTab === "residencial" ? residencialProjects : comercialProjects
-  const displayedProjects = isExpanded ? projects : projects.slice(0, 4)
-  const hasMoreProjects = projects.length > 4
+  const projects: Project[] = activeTab === "residencial" ? residencialProjects : comercialProjects
+  const displayedProjects: Project[] = isExpanded ? projects : projects.slice(0, 4)
+  const hasMoreProjects: boolean = projects.length > 4
 
   // Resetear expansión cuando cambia el tab
-  const handleTabChange = (tab: "residencial" | "comercial") => {
+  const handleTabChange = (tab: ProjectTab): void => {
     setActiveTab(tab)
     setIsExpanded(false)
   }

@@ -2,9 +2,45 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
+import type { CSSProperties } from "react"
 
-export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+export default function Header(): JSX.Element {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
+
+  const overlayStyle: CSSProperties = {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(0,0,0,0.5)",
+    zIndex: 80,
+  }
+
+  const menuPanelStyle: CSSProperties = {
+    position: "fixed",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    width: "45%",
+    backgroundColor: "rgba(33, 47, 53, 0.85)",
+    backdropFilter: "blur(12px)",
+    zIndex: 90,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  }
+
+  const socialIconsStyle: CSSProperties = {
+    position: "absolute",
+    bottom: "2rem",
+    left: "50%",
+    transform: "translateX(-50%)",
+    display: "flex",
+    flexDirection: "row",
+    gap: "2rem",
+  }
 
   return (
     <>
@@ -55,16 +91,8 @@ export default function Header() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              onClick={() => setIsMenuOpen(false)}
-              style={{
-                position: "fixed",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                backgroundColor: "rgba(0,0,0,0.5)",
-                zIndex: 80,
-              }}
+              onClick={(): void => setIsMenuOpen(false)}
+              style={overlayStyle}
             />
 
             {/* Panel del menú - 45% desde la derecha */}
@@ -73,20 +101,7 @@ export default function Header() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "tween", duration: 0.3, ease: "easeOut" }}
-              style={{
-                position: "fixed",
-                top: 0,
-                right: 0,
-                bottom: 0,
-                width: "45%",
-                backgroundColor: "rgba(33, 47, 53, 0.85)",
-                backdropFilter: "blur(12px)",
-                zIndex: 90,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+              style={menuPanelStyle}
             >
               {/* Links de navegación en el centro */}
               <nav className="text-center">
@@ -94,7 +109,7 @@ export default function Header() {
                   <li>
                     <a 
                       href="#nuestros-proyectos" 
-                      onClick={() => setIsMenuOpen(false)}
+                      onClick={(): void => setIsMenuOpen(false)}
                       className="text-white text-4xl font-light hover:text-[#b4a66d] transition-colors"
                     >
                       Proyectos
@@ -103,7 +118,7 @@ export default function Header() {
                   <li>
                     <a 
                       href="#servicios" 
-                      onClick={() => setIsMenuOpen(false)}
+                      onClick={(): void => setIsMenuOpen(false)}
                       className="text-white text-4xl font-light hover:text-[#b4a66d] transition-colors"
                     >
                       Servicios
@@ -112,7 +127,7 @@ export default function Header() {
                   <li>
                     <a 
                       href="#contacto" 
-                      onClick={() => setIsMenuOpen(false)}
+                      onClick={(): void => setIsMenuOpen(false)}
                       className="text-white text-4xl font-light hover:text-[#b4a66d] transition-colors"
                     >
                       Contacto
@@ -122,15 +137,7 @@ export default function Header() {
               </nav>
 
               {/* Redes sociales abajo horizontalmente */}
-              <div style={{ 
-                position: "absolute", 
-                bottom: "2rem", 
-                left: "50%", 
-                transform: "translateX(-50%)",
-                display: "flex", 
-                flexDirection: "row", 
-                gap: "2rem" 
-              }}>
+              <div style={socialIconsStyle}>
                 <a
                   href="https://instagram.com"
                   target="_blank"

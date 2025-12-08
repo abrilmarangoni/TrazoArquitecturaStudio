@@ -4,23 +4,23 @@ import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import { ArrowDown } from "lucide-react"
 
-const heroImages = [
+const heroImages: readonly string[] = [
   "/hero-architecture-1.jpg",
   "/hero-architecture-2.jpg",
   "/hero-architecture-3.jpg",
   "/hero-architecture-4.jpg",
   "/hero-architecture-5.jpg",
-]
+] as const
 
-export default function HeroSection() {
-  const [currentImage, setCurrentImage] = useState(0)
+export default function HeroSection(): JSX.Element {
+  const [currentImage, setCurrentImage] = useState<number>(0)
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % heroImages.length)
+    const interval: NodeJS.Timeout = setInterval(() => {
+      setCurrentImage((prev: number) => (prev + 1) % heroImages.length)
     }, 4000)
 
-    return () => clearInterval(interval)
+    return (): void => clearInterval(interval)
   }, [])
 
   return (
