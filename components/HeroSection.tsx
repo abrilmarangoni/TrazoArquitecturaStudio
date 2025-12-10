@@ -1,7 +1,6 @@
 "use client"
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import Image from "next/image"
 import { ArrowDown } from "lucide-react"
 
 const heroImages: readonly string[] = [
@@ -65,22 +64,6 @@ export default function HeroSection(): JSX.Element {
           <p className="text-base md:text-lg font-light leading-relaxed opacity-90 text-[#f3f2f3]">
             Diseñamos espacios únicos que combinan funcionalidad, estética y sostenibilidad para transformar tu visión en realidad.
           </p>
-        </motion.div>
-
-        {/* Logo grande a la izquierda */}
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="relative w-full px-4 md:px-8 mt-auto z-0 pointer-events-none select-none flex justify-start"
-        >
-          <Image 
-            src="/logo3.png" 
-            alt="TRAZO" 
-            width={1200} 
-            height={600} 
-            className="w-[85vw] md:w-[60vw] max-w-6xl opacity-30 object-contain brightness-0 invert"
-          />
         </motion.div>
 
         {/* Indicador de Scroll */}
